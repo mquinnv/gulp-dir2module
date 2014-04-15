@@ -1,4 +1,4 @@
-# grunt-dir2module v0.0.1 [![Build Status: Linux](https://travis-ci.org/erikras/grunt-dir2module.png?branch=master)](https://travis-ci.org/erikras/grunt-dir2module)
+# grunt-dir2module v0.0.1
 
 > Creates a browserify/commonjs module with a map of all the files in a directory.
 
