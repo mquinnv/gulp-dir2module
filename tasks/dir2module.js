@@ -7,43 +7,40 @@
 
 'use strict';
 module.exports = function(grunt) {
-  var chalk = require('chalk');
+  var chalk = require('chalk'),
+      getRelativePath = function(from, to) {
+        var fromDirs = from.split('/'),
+          toDirs = to.split('/'),
+          i, common = 0;
+        // drop filename
+        fromDirs.pop();
+        for(i=0;i<fromDirs.length;i++) {
+          if(fromDirs[i] === toDirs[i]) {
+            common = i+1;
+          }
+        }
+        return './'+toDirs.slice(common, toDirs.length).join('/');
+      };
 
   grunt.registerMultiTask('dir2module', 'Create module files.', function() {
-    var output = ['module.exports = {\n'];
+    var header = '\'use strict\';\nmodule.exports = {\n',
+      footer = '\n};';
 
     // Iterate over all src-dest file pairs.
     this.files.forEach(function(f) {
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
+      var submodules = f.src.filter(function(filepath) {
+        return filepath !== f.dest;
       }).map(function(filepath) {
-        // Read file source.
-        //var src = grunt.file.read(filepath);
-        grunt.log.writeln(filepath);
-/*
-        // Process files as templates if requested.
-        if (typeof options.process === 'function') {
-          src = options.process(src, filepath);
-        } else if (options.process) {
-          src = grunt.template.process(src, options.process);
-        }
-        }
-        */
-        return filepath;
-      }).join(',');
+        var relativePath = getRelativePath(f.dest,filepath),
+          name = /^.*\/([^\/]+)\.js$/.exec(filepath)[1];
+      return '  \''+name+'\': require(\''+relativePath+'\')';
+      }).join(',\n');
 
       // Write the destination file.
-      //grunt.file.write(f.dest, src);
+      grunt.file.write(f.dest, header + submodules + footer);
 
       // Print a success message.
       grunt.log.writeln('File ' + chalk.cyan(f.dest) + ' created.');
     });
   });
-
 };
