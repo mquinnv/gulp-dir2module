@@ -1,4 +1,4 @@
-# grunt-dir2module v0.0.1
+# grunt-dir2module v0.0.2
 
 > Creates a browserify/commonjs module with a map of all the files in a directory.
 
