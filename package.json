@@ -1,42 +1,40 @@
 {
-  "name": "grunt-dir2module",
+  "name": "gulp-dir2module",
   "description": "Creates a single browserify/commonjs module that includes all files in a directory.",
-  "version": "0.0.2",
-  "homepage": "https://github.com/erikras/grunt-dir2module",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mquinnv/gulp-dir2module",
   "author": {
-    "name": "Erik Rasmussen",
-    "url": "http://erikras.com/"
+    "name": "Michael Ventura",
+    "url": "http://white-leaf.com/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/erikras/grunt-dir2module.git"
+    "url": "git://github.com/mquinnv/gulp-dir2module.git"
   },
   "bugs": {
-    "url": "git://github.com/erikras/grunt-dir2module/issues"
+    "url": "git://github.com/mquinnv/gulp-dir2module/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/erikras/grunt-dir2module/blob/master/LICENSE-MIT"
+      "url": "https://github.com/mquinnv/gulp-dir2module/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
     "node": ">= 0.8.0"
   },
-  "dependencies": {
-    "chalk": "~0.4.0"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.0"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.0"
-  },
   "keywords": [
-    "gruntplugin"
+    "gulpplugin",
+    "browserify",
+    "dir2module",
+    "gulp"
   ],
+  "main": "index.js",
   "files": [
-    "tasks",
     "LICENSE-MIT"
-  ]
+  ],
+  "dependencies": {
+    "gulp-util": "^2.2.16",
+    "through": "^2.3.4"
+  }
 }
