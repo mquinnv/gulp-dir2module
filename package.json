@@ -1,7 +1,7 @@
 {
   "name": "gulp-dir2module",
   "description": "Creates a single browserify/commonjs module that includes all files in a directory.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/mquinnv/gulp-dir2module",
   "author": {
     "name": "Michael Ventura",
