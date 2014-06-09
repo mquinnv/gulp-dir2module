@@ -1,4 +1,4 @@
-# gulp-dir2module v0.0.1
+# gulp-dir2module v0.0.2
 
 ## Information
 
