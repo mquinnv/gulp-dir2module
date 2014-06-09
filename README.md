@@ -1,43 +1,34 @@
-# grunt-dir2module v0.0.2
+# gulp-dir2module v0.0.1
 
-> Creates a browserify/commonjs module with a map of all the files in a directory.
+## Information
 
-## Getting Started
-This plugin requires Grunt `~0.4.0`
+<table>
+<tr> 
+<td>Package</td><td>gulp-dir2module</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>
+Creates a browserify/commonjs module with a map of all the files in a directory.
+</td>
+</tr>
+<tr>
+<td>Node Version</td>
+<td>>= 0.10</td>
+</tr>
+</table>
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+## Usage
 
-```shell
-npm install grunt-dir2module --save-dev
-```
+```javascript
+var dir2module = require('gulp-dir2module');
 
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
-
-```js
-grunt.loadNpmTasks('grunt-dir2module');
-```
-
-
-## Dir2Module task
-_Run this task with the `grunt dir2module` command._
-
-Task targets, files and options may be specified according to the Grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
-
-### Examples
-
-```js
-// Project configuration.
-grunt.initConfig({
-  dir2module: {
-    options: {
-      files: {
-        'dist/basic.js': ['src/services/*.js']
-      }
-    },
-  },
+gulp.task('dir2module', function() {
+    gulp.src('js/controllers/*.js')
+        .pipe(dir2module('controllers.js'))
+            .pipe(gulp.dest('js/controllers'))
 });
 ```
 
----
+This will create a file in the js/controllers directory called controllers.js that exports a map with each js file (excluding itself).
 
-Task submitted by [Erik Rasmussen](http://erikras.com/)
