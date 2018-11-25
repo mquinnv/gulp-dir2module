@@ -2,11 +2,12 @@
 const through = require('through'),
   PluginError = require('plugin-error'),
   File = require('vinyl'),
+  path = require('path'),
   {Buffer} = require('buffer')
 
-module.exports = fileName => {
-  if (!fileName) {
-    throw new PluginError('dir2module', 'Missing fileName option for dir2module')
+module.exports = dir => {
+  if (!dir) {
+    throw new PluginError('dir2module', 'Missing dir option for dir2module')
   }
 
   let firstFile,
@@ -23,7 +24,7 @@ module.exports = fileName => {
     if (!firstFile) {
       firstFile = file
     }
-    if (file.path.substring(file.base.length+1) !== fileName) {
+    if (path.basename(file.path,'.js') !== dir) {
       files.push(file.path.substring(file.base.length, file.path.length - 3))
     }
   }
@@ -40,7 +41,7 @@ module.exports = fileName => {
       moduleFile = new File({
         cwd: firstFile.cwd,
         base: firstFile.base,
-        path: firstFile.base + '/' + fileName,
+        path: firstFile.base + '/' + dir,
         contents: new Buffer(contents)
       })
     this.emit('data', moduleFile)
